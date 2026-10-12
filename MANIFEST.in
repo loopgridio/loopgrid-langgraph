@@ -1,0 +1,6 @@
+include README.md LICENSE NOTICE.md INTEGRATION-CONTRACT.md SECURITY.md VALIDATION.md CHANGELOG.md WINDOWS-TEST-STEPS.md RELEASE-CHECKLIST.md
+recursive-include tests *.py
+recursive-include scripts *.py
+recursive-include examples *.py
+recursive-include docs *.md
+recursive-exclude * __pycache__ *.py[cod] .DS_Store
