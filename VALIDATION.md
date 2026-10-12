@@ -1,4 +1,4 @@
-# LoopGrid LangGraph v0.1.0 — RC3 validation ledger (2026-10-12)
+# LoopGrid LangGraph v0.1.0 — Validation and release ledger (2026-10-12)
 
 ## Verified on user's Windows system for earlier candidates
 
@@ -24,12 +24,13 @@
 - `native_core_langgraph_e2e.py`: **PASS**, actual installed LangGraph `StateGraph` + local LoopGrid Core, policy, signed human review, interrupt/resume and replay protection; signed workspace verification `true`, failures `[]`, two synthetic executions, lifecycle `evidence_complete`, applicable coverage `100`, no real money.
 - The earlier RC2 signed-redaction mismatch did **not** recur.
 
-## Remaining publication gates
+## Final release gates — verified on Windows and GitHub (2026-10-12)
 
-1. Build a **fresh** wheel and sdist; run `scripts/check_dist.py` and `python -m twine check dist\*` (PowerShell).
-2. Install the **built wheel** into a new isolated venv without editable mode, allowing dependency resolution; import public classes and confirm package metadata.
-3. Push the **validated RC3 code** to a new `loopgridio/loopgrid-langgraph` repository and require all hosted GitHub CI checks on Python 3.10/3.12/3.13 across Ubuntu/Windows/macOS, plus separate clean-wheel consumer job.
-4. Tag/publish release `v0.1.0` only after CI, prepare PyPI Trusted Publisher OIDC and enable opt-in release workflow; verify the first public `pip install` from PyPI.
-5. Production host controls for signed reviewer identity, remote multi-worker durable leases and authoritative external business outcome verification remain **host responsibilities**. SQLite lease is single-host only; async guarded callbacks are not supported in v0.1.0.
+- **Package:** `python -m build` produced wheel and sdist; `scripts/check_dist.py` passed and `twine check` passed on both artifacts. Clean non-editable wheel installation, public-class import and `pip check` passed in a separate fresh local venv.
+- **Expanded suite:** 12 additional Core, lease and error-path regression tests increased the suite from 77 to **89/89 passed**. Windows Python 3.12 statement coverage **95.78%**, above the 90% minimum. No runtime Python source changed for this coverage fix.
+- **Hosted GitHub CI:** 9/9 OS/Python matrix jobs passed across Ubuntu/Windows/macOS on Python 3.10/3.12/3.13; the separate clean-wheel consumer-install job passed (source commit `24327c4`).
+- **Public release:** GitHub release `v0.1.0` points to commit `24327c4` and is marked Latest. The `pypi` GitHub environment, PyPI Pending Trusted Publisher (`loopgridio/loopgrid-langgraph`, `release.yml`, `pypi`) and explicit repository variable enabled publishing.
+- **PyPI:** The GitHub OIDC publishing job completed successfully and `loopgrid-langgraph` appears on the publisher's PyPI projects list. **A separate new consumer installation using `pip install --no-cache-dir --index-url https://pypi.org/simple/ loopgrid-langgraph==0.1.0` remains to be recorded.**
+- **Evidence interpretation:** All local Core/E2E actions were synthetic; signed workspace verification passed. Production host authenticated reviewer, distributed lock, state privacy and real business-outcome proof remain application responsibilities.
 
-**Release decision: PASS on native/runtime/real-Core local validation; HOLD public distribution until remaining release gates pass.**
+**Release decision:** v0.1.0 is publicly released; do not describe it as a pending release candidate. Publication and independent public-index installation are distinct milestones. Official LangGraph ecosystem listing is not yet established.

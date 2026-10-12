@@ -6,7 +6,17 @@ LoopGrid preserves evidence for consequential agent decisions; **your applicatio
 
 ## Release status
 
-`v0.1.0` remains **unpublished**. The hardened RC3 source passed **77/77 tests** on Windows Python 3.12 against installed LangGraph 1.2.14. Both native runtime and persistent SQLite checkpoint/restart tests passed; both real LoopGrid Core `0.8.1-design-partner` E2Es passed with signed workspace verification valid, zero failures, `evidence_complete`, 100% applicable coverage and two synthetic executions (no real money). The Core redaction-metadata fix is thus confirmed end-to-end. Local reproducible wheel/sdist + Twine audit, non-editable clean wheel consumer install, hosted cross-platform CI, and PyPI publication are the outstanding release gates. See [VALIDATION.md](VALIDATION.md).
+**Published v0.1.0** — [GitHub release](https://github.com/loopgridio/loopgrid-langgraph/releases/tag/v0.1.0) · [PyPI package](https://pypi.org/project/loopgrid-langgraph/0.1.0/).
+
+Release evidence (2026-10-12): **89/89 unit/security tests passed**, 9/9 hosted GitHub CI OS/Python test jobs passed (Ubuntu, Windows and macOS; Python 3.10, 3.12, 3.13), and the separate wheel-consumer install job passed. Windows coverage was 95.78% against a 90% CI threshold. Real installed LangGraph 1.2.14 `StateGraph` interrupt/resume and persistent SQLite restart tests passed; both local Core `0.8.1-design-partner` E2Es passed with valid signed workspace verification, zero failures, `evidence_complete` and sandbox-only execution. Wheel/sdist and Twine validation passed; the GitHub OIDC publishing workflow succeeded and PyPI lists `loopgrid-langgraph`. A separate no-cache **public-index** install has not yet been recorded in this validation ledger.
+
+LoopGrid remains the decision evidence layer, not the action execution system. See [VALIDATION.md](VALIDATION.md), [SECURITY.md](SECURITY.md) and [INTEGRATION-CONTRACT.md](INTEGRATION-CONTRACT.md) for exact guarantees and limits. This independently developed integration does not claim official LangGraph endorsement.
+
+## Install the published package
+
+```bash
+python -m pip install loopgrid-langgraph==0.1.0
+```
 
 ## Install for development
 
@@ -22,7 +32,7 @@ python scripts/langgraph_runtime_e2e.py
 python scripts/persistent_langgraph_e2e.py
 ```
 
-The package name `loopgrid-langgraph` and public repository URL are **proposed** until the owner confirms availability and creates them. No PyPI release is assumed yet.
+The package and repository are public. For local framework testing, the optional `persistence-test` extra installs the native SQLite checkpointer; the default published package keeps it optional.
 
 ## Native StateGraph usage
 
